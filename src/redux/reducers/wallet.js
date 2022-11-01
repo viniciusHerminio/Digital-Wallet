@@ -1,1 +1,7 @@
-// Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
+const INITTIAL_STATE = {
+  wallet: true,
+};
+
+const walletReducer = (state = INITTIAL_STATE) => state;
+
+export default walletReducer;

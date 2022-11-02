@@ -109,7 +109,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  dispatch: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect()(Login);

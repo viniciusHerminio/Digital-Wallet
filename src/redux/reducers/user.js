@@ -8,6 +8,7 @@ const userReducer = (state = INITTIAL_STATE, action) => {
   switch (action.type) {
   case EMAIL_SELECTED: {
     return {
+      ...state,
       email: action.email,
     };
   }

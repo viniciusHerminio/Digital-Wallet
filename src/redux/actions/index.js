@@ -16,7 +16,9 @@ export const requestCurrency = (currency) => ({
 export const fetchCurrencyValue = async (dispatch) => {
   try {
     const currencyValue = await getCurrencyValue();
-    dispatch(requestCurrency(currencyValue));
+    const currencyAtt = currencyValue
+      .filter((cur) => cur !== 'USDT');
+    await dispatch(requestCurrency(currencyAtt));
   } catch (error) {
     console.log(error);
   }

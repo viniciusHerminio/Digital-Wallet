@@ -36,7 +36,7 @@ class WalletForm extends Component {
               id="coin"
               data-testid="currency-input"
             >
-              {currency.filter((cur) => cur !== 'USDT').map((curFiltered, index) => (
+              {currency.map((curFiltered, index) => (
                 <option key={ index } value={ curFiltered }>{ curFiltered }</option>
               ))}
             </select>
@@ -101,12 +101,7 @@ class WalletForm extends Component {
 
 WalletForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  filter: PropTypes.func,
   currency: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
-
-WalletForm.defaultProps = {
-  filter: PropTypes.func,
 };
 
 const mapStateToProps = (globalState) => ({

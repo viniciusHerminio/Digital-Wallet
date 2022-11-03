@@ -13,15 +13,17 @@ class Header extends Component {
           {' '}
           { email }
         </h5>
-        <h5 data-testid="total-field">
-          Despesa Total: R$
-          {' '}
-          { value }
-          {' '}
-        </h5>
-        <h5 data-testid="header-currency-field">
-          { currency }
-        </h5>
+        <div className="d-flex">
+          <h5 data-testid="total-field">
+            Despesa Total: R$
+            {' '}
+            { value }
+            {' '}
+          </h5>
+          <h5 data-testid="header-currency-field">
+            { currency }
+          </h5>
+        </div>
       </div>
     );
   }

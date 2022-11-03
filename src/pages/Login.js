@@ -1,7 +1,8 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { emailSelected } from '../redux/actions';
 
 class Login extends React.Component {
@@ -83,26 +84,45 @@ class Login extends React.Component {
       return <Redirect to="/carteira" />;
     }
     return (
-      <div>
-        <input
-          data-testid="email-input"
-          name="email"
-          value={ email }
-          onChange={ this.handleChange }
-        />
-        <input
-          data-testid="password-input"
-          name="password"
-          value={ password }
-          onChange={ this.handleChange }
-        />
-        <button
-          type="submit"
-          disabled={ !btnEnabled }
-          onClick={ this.redirectPage }
+      <div className="container">
+        <div
+          className="position-absolute top-50 start-50 translate-middle"
         >
-          Entrar
-        </button>
+          <div className="mb-3 row">
+            <input
+              data-testid="email-input"
+              name="email"
+              id="typeEmailX"
+              type="email"
+              value={ email }
+              onChange={ this.handleChange }
+              className="form-control"
+              placeholder="Email address"
+            />
+          </div>
+          <div className="mb-3 row">
+            <input
+              data-testid="password-input"
+              name="password"
+              id="floatingPassword"
+              value={ password }
+              type="password"
+              onChange={ this.handleChange }
+              className="form-control"
+              placeholder="Password"
+            />
+          </div>
+          <div className="d-grid">
+            <button
+              type="submit"
+              className="btn btn-success"
+              disabled={ !btnEnabled }
+              onClick={ this.redirectPage }
+            >
+              Entrar
+            </button>
+          </div>
+        </div>
       </div>
     );
   }

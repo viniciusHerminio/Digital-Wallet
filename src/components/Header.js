@@ -18,7 +18,7 @@ class Header extends Component {
           <h5 data-testid="total-field">
             { expenses.length === 0 ? 0 : expenses
               .reduce((prev, curr) => {
-                const price = curr.exchangeRates[curr.coin].ask;
+                const price = curr.exchangeRates[curr.currency].ask;
                 const valueSelect = Number(curr.value) * Number(price);
                 const prevNumber = parseFloat(prev);
                 const total = (valueSelect + prevNumber).toFixed(2);

@@ -40,10 +40,10 @@ class WalletForm extends Component {
       const infos = {
         id,
         value,
-        coin,
-        payment,
-        tag,
         description,
+        currency: coin,
+        method: payment,
+        tag,
         exchangeRates: currencyValue,
       };
       dispatch(infosSelected(infos));

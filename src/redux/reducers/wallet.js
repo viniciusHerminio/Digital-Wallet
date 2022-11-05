@@ -1,4 +1,4 @@
-import { REQUEST_CURRENCY } from '../actions';
+import { REQUEST_CURRENCY, INFOS_SELECTED, VALUE_SELECTED } from '../actions';
 
 const INITTIAL_STATE = {
   currencies: [], // array de string
@@ -15,6 +15,20 @@ const walletReducer = (state = INITTIAL_STATE, action) => {
     return {
       ...state,
       currencies: action.currency,
+      currencyValue: action.currencyValue,
+    };
+  }
+
+  case INFOS_SELECTED: {
+    return {
+      ...state,
+      expenses: [...state.expenses, action.infos],
+    };
+  }
+  case VALUE_SELECTED: {
+    return {
+      ...state,
+      value: action.value,
     };
   }
   default: return state;

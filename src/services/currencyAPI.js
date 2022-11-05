@@ -3,7 +3,10 @@ const getCurrencyValue = async () => {
   const currencyValue = await response.json();
   const coins = Object.keys(currencyValue);
 
-  return coins;
+  return ({
+    coins,
+    currencyValue,
+  });
 };
 
 export default getCurrencyValue;

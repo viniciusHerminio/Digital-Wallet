@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 
 class Header extends Component {
   render() {
-    const { email, value, currency } = this.props;
+    const { email, expenses, currency } = this.props;
+    console.log(expenses);
     return (
       <div className="d-flex justify-content-around p-4 bg-light">
         <h5 data-testid="email-field">
@@ -15,10 +16,14 @@ class Header extends Component {
         </h5>
         <div className="d-flex">
           <h5 data-testid="total-field">
-            Despesa Total: R$
-            {' '}
-            { value }
-            {' '}
+            { expenses.length === 0 ? 0 : expenses
+              .reduce((prev, curr) => {
+                const price = curr.exchangeRates[curr.coin].ask;
+                const valueSelect = Number(curr.value) * Number(price);
+                const prevNumber = parseFloat(prev);
+                const total = (valueSelect + prevNumber).toFixed(2);
+                return (total);
+              }, 0) }
           </h5>
           <h5 data-testid="header-currency-field">
             { currency }
@@ -33,12 +38,15 @@ const mapStateToProps = (globalState) => ({
   email: globalState.user.email,
   value: globalState.wallet.value,
   currency: globalState.wallet.currency,
+  expenses: globalState.wallet.expenses,
 });
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  })).isRequired,
 };
 
 export default connect(mapStateToProps)(Header);

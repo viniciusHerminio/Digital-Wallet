@@ -22,7 +22,7 @@ export const fetchCurrencyValue = async (dispatch) => {
     const currencyAtt = currencyValue.coins.filter((cur) => cur !== 'USDT');
     await dispatch(requestCurrency(currencyAtt, currencyValue.currencyValue));
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 

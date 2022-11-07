@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 class Header extends Component {
   render() {
     const { email, expenses, currency } = this.props;
-    console.log(expenses);
     return (
       <div className="d-flex justify-content-around p-4 bg-light">
         <h5 data-testid="email-field">

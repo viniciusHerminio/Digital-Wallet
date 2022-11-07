@@ -55,32 +55,6 @@ class WalletForm extends Component {
     });
   };
 
-  /*  defineValue = () => {
-    const { expenses, dispatch } = this.props;
-    const { value, id } = this.state;
-    const response = expenses[id];
-    console.log();
-    const { coin } = response;
-    const options = response.exchangeRates;
-    const result = Object.entries(options).find((option) => option[0] === coin);
-    const sum = ((value * result[1].ask).toFixed(2));
-    dispatch(valueSelected(Number(sum)));
-  }; */
-
-  /*   defineValue = () => {
-    const { expenses, dispatch } = this.props;
-    const { value, id } = this.state;
-    const response = expenses.map((expense) => {
-      const { coin } = expense;
-      const options = expense.exchangeRates;
-      const result = Object.entries(options)
-        .find((option) => option[0] === coin);
-      const sum = ((value * result[1].ask).toFixed(2));
-      dispatch(valueSelected(Number(sum)));
-    });
-    return response;
-  };
- */
   render() {
     const { value, coin, payment, tag, description } = this.state;
     const { currency } = this.props;
@@ -189,13 +163,13 @@ class WalletForm extends Component {
 }
 
 WalletForm.defaultProps = {
-  currencyValue: PropTypes.func,
+  currencyValue: PropTypes.objectOf(PropTypes.string),
 };
 
 WalletForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   currency: PropTypes.arrayOf(PropTypes.string).isRequired,
-  currencyValue: PropTypes.func,
+  currencyValue: PropTypes.objectOf(PropTypes.string),
 };
 
 const mapStateToProps = (globalState) => ({

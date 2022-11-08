@@ -1,8 +1,6 @@
 import userEvent from '@testing-library/user-event';
-import { waitFor } from '@testing-library/react';
 import Wallet from '../pages/Wallet';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
-import mockData from './helpers/mockData';
 
 describe('Testes referentes a página da carteira', () => {
   const TOTAL_FIELD = 'total-field';

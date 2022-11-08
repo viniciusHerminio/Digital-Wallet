@@ -1,4 +1,9 @@
-import { REQUEST_CURRENCY, INFOS_SELECTED, VALUE_SELECTED } from '../actions';
+import {
+  REQUEST_CURRENCY_SUCESS,
+  INFOS_SELECTED,
+  VALUE_SELECTED,
+  REQUEST_CURRENCY,
+} from '../actions';
 
 const INITTIAL_STATE = {
   currencies: [], // array de string
@@ -7,6 +12,7 @@ const INITTIAL_STATE = {
   idToEdit: 0, // valor numérico que armazena o id da despesa que esta sendo editada
   value: 0.00,
   currency: 'BRL',
+  isFetching: false,
 };
 
 const walletReducer = (state = INITTIAL_STATE, action) => {
@@ -14,8 +20,15 @@ const walletReducer = (state = INITTIAL_STATE, action) => {
   case REQUEST_CURRENCY: {
     return {
       ...state,
+      isFetching: true,
+    };
+  }
+  case REQUEST_CURRENCY_SUCESS: {
+    return {
+      ...state,
       currencies: action.currency,
       currencyValue: action.currencyValue,
+      isFetching: false,
     };
   }
 

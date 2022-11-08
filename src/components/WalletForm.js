@@ -163,13 +163,13 @@ class WalletForm extends Component {
 }
 
 WalletForm.defaultProps = {
-  currencyValue: PropTypes.objectOf(PropTypes.string),
+  currencyValue: () => {},
 };
 
 WalletForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   currency: PropTypes.arrayOf(PropTypes.string).isRequired,
-  currencyValue: PropTypes.objectOf(PropTypes.string),
+  currencyValue: () => {},
 };
 
 const mapStateToProps = (globalState) => ({

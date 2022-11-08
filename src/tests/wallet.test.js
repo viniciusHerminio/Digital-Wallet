@@ -1,15 +1,36 @@
 import userEvent from '@testing-library/user-event';
+import { waitFor } from '@testing-library/react';
 import Wallet from '../pages/Wallet';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import mockData from './helpers/mockData';
 
 describe('Testes referentes a página da carteira', () => {
-  test('Se a página conta com um header com o email e o valor gasto', () => {
-    const { getByTestId } = renderWithRouterAndRedux(<Wallet />);
+  const TOTAL_FIELD = 'total-field';
+  test('Se a página conta com um header com o email e o loading do valor gasto', async () => {
+    const {
+      getByTestId,
+      getByText,
+      findByTestId,
+      getByRole,
+    } = renderWithRouterAndRedux(<Wallet />);
     const email = getByTestId('email-field');
     expect(email).toBeInTheDocument();
-    const total = getByTestId('total-field');
+    const loading = getByText(/loading/i);
+    expect(loading).toBeInTheDocument();
+    await findByTestId(TOTAL_FIELD);
+    const total = getByTestId(TOTAL_FIELD);
     expect(total).toBeInTheDocument();
+    const btnAdd = getByRole('button', { name: 'Adicionar despesa' });
+    const valor = getByTestId('value-input');
+    const description = getByTestId('description-input');
+    userEvent.type(valor, '20');
+    userEvent.type(description, 'Teste');
+    userEvent.click(btnAdd);
+    const loading2 = getByText(/loading/i);
+    expect(loading2).toBeInTheDocument();
+    await findByTestId(TOTAL_FIELD);
+    const total2 = getByTestId(TOTAL_FIELD);
+    expect(total2).toBeInTheDocument();
   });
   test('Se a página conta com um formulario', () => {
     const { getByTestId } = renderWithRouterAndRedux(<Wallet />);
@@ -23,24 +44,5 @@ describe('Testes referentes a página da carteira', () => {
     expect(tag).toBeInTheDocument();
     const description = getByTestId('description-input');
     expect(description).toBeInTheDocument();
-  });
-  test('Se o valor total é alterado e os inputs de valor e descrição são limpos ao adicionar a despesa', async () => {
-    globalThis.fetch = jest.fn(() => Promise.resolve({
-      json: () => Promise.resolve(mockData),
-    }));
-    const exchangeRatesValues = mockData.USD.ask;
-    const expectedValue = (20 * exchangeRatesValues).toFixed(2);
-    const { getByTestId, getByRole, findByTestId } = renderWithRouterAndRedux(<Wallet />);
-    const valor = getByTestId('value-input');
-    const description = getByTestId('description-input');
-    const btnAdd = getByRole('button', { name: 'Adicionar despesa' });
-    userEvent.type(valor, '20');
-    userEvent.type(description, 'Teste');
-    userEvent.click(btnAdd);
-    const total = await findByTestId('total-field');
-    expect(valor).toHaveTextContent('');
-    expect(description).toHaveTextContent('');
-    expect(global.fetch).toHaveBeenCalled();
-    expect(total).toHaveTextContent(expectedValue);
   });
 });

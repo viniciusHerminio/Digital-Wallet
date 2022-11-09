@@ -1,10 +1,11 @@
 import Proptypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { removeItem } from '../redux/actions';
 
 class Table extends Component {
   render() {
-    const { expenses } = this.props;
+    const { expenses, dispatch } = this.props;
     return (
       <table className="table table-hover">
         <thead>
@@ -61,7 +62,14 @@ class Table extends Component {
                 <td>Real</td>
                 <td>
                   <button type="button" className="btn btn-secondary">Editar</button>
-                  <button type="button" className="btn btn-danger">Excluir</button>
+                  <button
+                    data-testid="delete-btn"
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={ () => dispatch(removeItem(id)) }
+                  >
+                    Excluir
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -74,6 +82,7 @@ class Table extends Component {
 
 Table.propTypes = {
   expenses: Proptypes.arrayOf(Proptypes.objectOf).isRequired,
+  dispatch: Proptypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

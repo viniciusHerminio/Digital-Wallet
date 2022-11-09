@@ -5,6 +5,7 @@ export const REQUEST_CURRENCY_SUCESS = 'REQUEST_CURRENCY_SUCESS';
 export const INFOS_SELECTED = 'INFOS_SELECTED';
 export const VALUE_SELECTED = 'VALUE_SELECTED';
 export const REQUEST_CURRENCY = 'REQUEST_CURRENCY';
+export const DELETE_ITEM = 'DELETE_ITEM';
 
 export const emailSelected = (email) => ({
   type: EMAIL_SELECTED,
@@ -42,4 +43,9 @@ export const infosSelected = (infos) => ({
 export const valueSelected = (value) => ({
   type: VALUE_SELECTED,
   value,
+});
+
+export const removeItem = (id) => ({
+  type: DELETE_ITEM,
+  id,
 });

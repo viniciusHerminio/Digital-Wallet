@@ -3,6 +3,7 @@ import {
   INFOS_SELECTED,
   VALUE_SELECTED,
   REQUEST_CURRENCY,
+  DELETE_ITEM,
 } from '../actions';
 
 const INITTIAL_STATE = {
@@ -42,6 +43,12 @@ const walletReducer = (state = INITTIAL_STATE, action) => {
     return {
       ...state,
       value: action.value,
+    };
+  }
+  case DELETE_ITEM: {
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.id),
     };
   }
   default: return state;

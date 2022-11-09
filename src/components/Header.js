@@ -7,7 +7,7 @@ class Header extends Component {
   valueAtt = () => {
     const { expenses } = this.props;
     if (expenses.length === 0) {
-      return 0;
+      return Number('0.00').toFixed(2);
     }
     const result = expenses.reduce((prev, curr) => {
       const { exchangeRates, currency } = curr;

@@ -10,6 +10,7 @@ class Header extends Component {
       return Number('0.00').toFixed(2);
     }
     const result = expenses.reduce((prev, curr) => {
+      console.log(curr);
       const { exchangeRates, currency } = curr;
       const price = exchangeRates[currency];
       const { ask } = price;
